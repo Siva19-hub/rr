@@ -53,14 +53,14 @@ export default function Home() {
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-green-100 mb-6 border border-white/20">
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              India's Rural Marketplace
+              Sri Lanka's Rural Marketplace
             </div>
             <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
               Discover Authentic<br />
               <span className="text-amber-400">Rural Craftsmanship</span>
             </h1>
             <p className="text-lg text-green-100 mb-10 max-w-xl leading-relaxed">
-              Connect directly with rural artisans and makers. Buy unique handcrafted products, support local communities, and celebrate India's rich heritage.
+              Connect directly with rural artisans and makers. Buy unique handcrafted products, support local communities, and celebrate Sri Lanka's rich heritage.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
