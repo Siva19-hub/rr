@@ -26,8 +26,13 @@ export default function ProductDetail() {
       .select('*, seller:profiles(id,full_name,email), category:categories(id,name), reviews(id,rating,comment,created_at,buyer:profiles(full_name))')
       .eq('id', id)
       .maybeSingle()
-      .then(({ data }) => {
+      .then(({ data, error }) => {
+        if (error) console.error('Product fetch error:', error);
         setProduct(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error('Product fetch error:', err);
         setLoading(false);
       });
   }, [id]);
