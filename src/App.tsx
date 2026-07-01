@@ -1,8 +1,10 @@
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import SplashScreen from './components/SplashScreen';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -15,10 +17,26 @@ import BuyerDashboard from './pages/buyer/BuyerDashboard';
 import AdminDashboard from './pages/admin/AdminDashboard';
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleSplashComplete = () => {
+    setShowSplash(false);
+  };
+
   return (
     <AuthProvider>
+      {showSplash && <SplashScreen isLoading={isLoading} onLoadingComplete={handleSplashComplete} />}
       <BrowserRouter>
-        <div className="min-h-screen flex flex-col bg-stone-50">
+        <div className="min-h-screen flex flex-col bg-dark-900">
           <Navbar />
           <main className="flex-1">
             <Routes>
