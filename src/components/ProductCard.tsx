@@ -15,8 +15,8 @@ export default function ProductCard({ product, showStatus = false, actions }: Pr
     : null;
 
   return (
-    <div className="card-lift bg-dark-800 rounded-2xl border border-dark-700 overflow-hidden group flex flex-col">
-      <Link to={`/products/${product.id}`} className="block overflow-hidden aspect-[4/3] bg-dark-700 relative">
+    <div className="card-lift bg-white rounded-2xl border border-stone-200 overflow-hidden group flex flex-col">
+      <Link to={`/products/${product.id}`} className="block overflow-hidden aspect-[4/3] bg-stone-100 relative">
         {product.image_url ? (
           <>
             <img
@@ -35,37 +35,37 @@ export default function ProductCard({ product, showStatus = false, actions }: Pr
 
       <div className="p-4 flex flex-col flex-1">
         <div className="flex items-start justify-between gap-2 mb-1">
-          <Link to={`/products/${product.id}`} className="font-semibold text-white hover:text-primary-400 line-clamp-2 text-sm leading-snug flex-1 smooth-transition">
+          <Link to={`/products/${product.id}`} className="font-semibold text-gray-900 hover:text-primary-600 line-clamp-2 text-sm leading-snug flex-1 smooth-transition">
             {product.title}
           </Link>
           {showStatus && <StatusBadge status={product.status} />}
         </div>
 
         {product.category && (
-          <span className="text-xs text-primary-400 font-medium mb-2 group-hover:text-accent-400 smooth-transition">{product.category.name}</span>
+          <span className="text-xs text-primary-600 font-medium mb-2 group-hover:text-accent-600 smooth-transition">{product.category.name}</span>
         )}
 
-        <p className="text-xs text-dark-400 line-clamp-2 mb-3 leading-relaxed group-hover:text-dark-300 smooth-transition">{product.description}</p>
+        <p className="text-xs text-gray-500 line-clamp-2 mb-3 leading-relaxed group-hover:text-gray-600 smooth-transition">{product.description}</p>
 
         <div className="mt-auto flex items-center justify-between">
-          <span className="text-lg font-bold text-primary-400 group-hover:text-accent-400 smooth-transition">₹{Number(product.price).toLocaleString('en-IN')}</span>
+          <span className="text-lg font-bold text-gray-900 group-hover:text-primary-600 smooth-transition">₹{Number(product.price).toLocaleString('en-IN')}</span>
           <div className="flex flex-col items-end gap-1">
             {avgRating && (
               <div className="flex items-center gap-1 group-hover:scale-110 smooth-transition origin-right">
-                <Star className="w-3.5 h-3.5 text-accent-400 fill-accent-400" />
-                <span className="text-xs text-dark-300 font-medium">{avgRating}</span>
+                <Star className="w-3.5 h-3.5 text-accent-500 fill-accent-500" />
+                <span className="text-xs text-gray-600 font-medium">{avgRating}</span>
               </div>
             )}
             {product.seller && (
-              <div className="flex items-center gap-1 group-hover:text-primary-300 smooth-transition">
-                <MapPin className="w-3 h-3 text-dark-500" />
-                <span className="text-xs text-dark-500">{product.seller.full_name}</span>
+              <div className="flex items-center gap-1 group-hover:text-primary-600 smooth-transition">
+                <MapPin className="w-3 h-3 text-stone-400" />
+                <span className="text-xs text-stone-400">{product.seller.full_name}</span>
               </div>
             )}
           </div>
         </div>
 
-        {actions && <div className="mt-3 pt-3 border-t border-dark-700">{actions}</div>}
+        {actions && <div className="mt-3 pt-3 border-t border-stone-100">{actions}</div>}
       </div>
     </div>
   );
