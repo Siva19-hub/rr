@@ -15,23 +15,39 @@ export default function Home() {
 
   useEffect(() => {
     const load = async () => {
-      const [productsRes, categoriesRes, sellersRes, buyersRes, prodCountRes] = await Promise.all([
-        supabase.from('products').select('*, seller:profiles(id,full_name,email), category:categories(id,name), reviews(id,rating)').eq('status', 'APPROVED').order('created_at', { ascending: false }).limit(6),
-        supabase.from('categories').select('*').limit(6),
-        supabase.from('profiles').select('id', { count: 'exact' }).eq('role', 'SELLER'),
-        supabase.from('profiles').select('id', { count: 'exact' }).eq('role', 'BUYER'),
-        supabase.from('products').select('id', { count: 'exact' }).eq('status', 'APPROVED'),
-      ]);
-      setFeaturedProducts(productsRes.data ?? []);
-      setCategories(categoriesRes.data ?? []);
-      setStats({
-        sellers: sellersRes.count ?? 0,
-        buyers: buyersRes.count ?? 0,
-        products: prodCountRes.count ?? 0,
-      });
-      setLoading(false);
+      try {
+        const [productsRes, categoriesRes, sellersRes, buyersRes, prodCountRes] = await Promise.all([
+          supabase.from('products').select('*, seller:profiles(id,full_name,email), category:categories(id,name), reviews(id,rating)').eq('status', 'APPROVED').order('created_at', { ascending: false }).limit(6),
+          supabase.from('categories').select('*').limit(6),
+          supabase.from('profiles').select('id', { count: 'exact' }).eq('role', 'SELLER'),
+          supabase.from('profiles').select('id', { count: 'exact' }).eq('role', 'BUYER'),
+          supabase.from('products').select('id', { count: 'exact' }).eq('status', 'APPROVED'),
+        ]);
+
+        if (productsRes.error) console.error('Products error:', productsRes.error);
+        if (categoriesRes.error) console.error('Categories error:', categoriesRes.error);
+
+        setFeaturedProducts(productsRes.data ?? []);
+        setCategories(categoriesRes.data ?? []);
+        setStats({
+          sellers: sellersRes.count ?? 0,
+          buyers: buyersRes.count ?? 0,
+          products: prodCountRes.count ?? 0,
+        });
+      } catch (err) {
+        console.error('Load error:', err);
+      } finally {
+        setLoading(false);
+      }
     };
-    load();
+
+    // Add timeout fallback
+    const timeout = setTimeout(() => {
+      console.log('Loading timeout reached');
+      setLoading(false);
+    }, 5000);
+
+    load().finally(() => clearTimeout(timeout));
   }, []);
 
   useEffect(() => {

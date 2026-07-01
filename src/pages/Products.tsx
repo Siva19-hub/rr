@@ -35,11 +35,21 @@ export default function Products() {
     if (categoryId) query = query.eq('category_id', categoryId);
     if (search) query = query.ilike('title', `%${search}%`);
 
-    query.then(({ data, count }) => {
+    const timeout = setTimeout(() => {
+      console.log('Products loading timeout');
+      setLoading(false);
+    }, 5000);
+
+    query.then(({ data, count, error }) => {
+      if (error) {
+        console.error('Error fetching products:', error);
+      } else {
+        console.log('Fetched products:', data?.length, 'Total:', count);
+      }
       setProducts(data ?? []);
       setTotal(count ?? 0);
       setLoading(false);
-    });
+    }).finally(() => clearTimeout(timeout));
   }, [page, categoryId, search]);
 
   const setParam = (key: string, val: string) => {
