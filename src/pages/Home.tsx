@@ -55,27 +55,27 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero */}
-      <section className="hero-parallax relative bg-gradient-to-br from-orange-900 via-orange-800 to-primary-900 text-white overflow-hidden" onMouseMove={(e) => setMousePosition({ x: e.clientX, y: e.clientY })}>
+      <section className="hero-parallax relative bg-gradient-to-br from-green-900 via-green-800 to-emerald-900 text-white overflow-hidden" onMouseMove={(e) => setMousePosition({ x: e.clientX, y: e.clientY })}>
         <div className="absolute inset-0 opacity-20">
-          <div className="parallax-layer absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 30% 50%, #ff9500 0%, transparent 60%), radial-gradient(circle at 80% 20%, #f7ad1b 0%, transparent 40%)', '--depth': '-20px' } as any} />
+          <div className="parallax-layer absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 30% 50%, #10b981 0%, transparent 60%), radial-gradient(circle at 80% 20%, #059669 0%, transparent 40%)', '--depth': '-20px' } as any} />
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 parallax-layer" style={{ '--depth': '10px' } as any}>
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-orange-100 mb-6 border border-white/20">
-              <span className="w-2 h-2 bg-orange-400 rounded-full animate-pulse" />
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-green-100 mb-6 border border-white/20">
+              <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
               Sri Lanka's Rural Marketplace
             </div>
             <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
               Discover Authentic<br />
-              <span className="text-accent-400">Rural Craftsmanship</span>
+              <span className="text-emerald-400">Rural Craftsmanship</span>
             </h1>
-            <p className="text-lg text-orange-100 mb-10 max-w-xl leading-relaxed">
+            <p className="text-lg text-green-100 mb-10 max-w-xl leading-relaxed">
               Connect directly with rural artisans and makers. Buy unique handcrafted products, support local communities, and celebrate Sri Lanka's rich heritage.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
                 to="/products"
-                className="btn-premium inline-flex items-center gap-2 bg-accent-500 hover:bg-accent-400 text-white font-semibold px-6 py-3.5 rounded-xl shadow-lg shadow-accent-900/20"
+                className="btn-premium inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-white font-semibold px-6 py-3.5 rounded-xl shadow-lg shadow-emerald-900/20"
               >
                 Browse Marketplace <ArrowRight className="w-4 h-4" />
               </Link>
@@ -95,9 +95,9 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <div className="grid grid-cols-3 gap-6">
             {[
-              { icon: Package, label: 'Products Listed', value: stats.products, color: 'text-primary-600 bg-primary-50' },
-              { icon: Users, label: 'Active Sellers', value: stats.sellers, color: 'text-accent-600 bg-accent-50' },
-              { icon: TrendingUp, label: 'Happy Buyers', value: stats.buyers, color: 'text-orange-600 bg-orange-50' },
+              { icon: Package, label: 'Products Listed', value: stats.products, color: 'text-green-600 bg-green-50' },
+              { icon: Users, label: 'Active Sellers', value: stats.sellers, color: 'text-emerald-600 bg-emerald-50' },
+              { icon: TrendingUp, label: 'Happy Buyers', value: stats.buyers, color: 'text-teal-600 bg-teal-50' },
             ].map(({ icon: Icon, label, value, color }) => (
               <div key={label} className="flex flex-col sm:flex-row items-center sm:items-start gap-4 p-4 rounded-xl hover:bg-stone-50 transition-colors">
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${color}`}>
@@ -162,11 +162,11 @@ export default function Home() {
       </section>
 
       {/* How It Works */}
-      <section className="bg-orange-900 text-white py-16">
+      <section className="bg-green-900 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-2xl font-bold mb-2">How RuralConnect Works</h2>
-            <p className="text-orange-300 text-sm">Simple, transparent, and community-first</p>
+            <p className="text-green-300 text-sm">Simple, transparent, and community-first</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
@@ -174,13 +174,13 @@ export default function Home() {
               { icon: Truck, step: '02', title: 'Direct Enquiry', desc: 'Buyers send enquiries directly to sellers. Negotiate and close deals seamlessly.' },
               { icon: Star, step: '03', title: 'Review & Rate', desc: 'After every completed deal, buyers can leave honest reviews to build trust.' },
             ].map(({ icon: Icon, step, title, desc }, idx) => (
-              <div key={step} className="card-lift relative p-6 bg-white/10 rounded-2xl border border-white/20 backdrop-blur-sm hover:border-accent-400/50 hover:bg-white/15 group" style={{ animationDelay: `${idx * 0.15}s` }}>
+              <div key={step} className="card-lift relative p-6 bg-white/10 rounded-2xl border border-white/20 backdrop-blur-sm hover:border-emerald-400/50 hover:bg-white/15 group" style={{ animationDelay: `${idx * 0.15}s` }}>
                 <div className="text-5xl font-black text-white/10 absolute top-4 right-4 group-hover:text-white/15 smooth-transition">{step}</div>
-                <div className="w-12 h-12 bg-accent-500 rounded-xl flex items-center justify-center mb-4 group-hover:shadow-lg group-hover:shadow-accent-500/50 smooth-transition">
+                <div className="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center mb-4 group-hover:shadow-lg group-hover:shadow-emerald-500/50 smooth-transition">
                   <Icon className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="font-semibold text-lg mb-2 group-hover:text-accent-300 smooth-transition">{title}</h3>
-                <p className="text-orange-200 text-sm leading-relaxed group-hover:text-white smooth-transition">{desc}</p>
+                <h3 className="font-semibold text-lg mb-2 group-hover:text-emerald-300 smooth-transition">{title}</h3>
+                <p className="text-green-200 text-sm leading-relaxed group-hover:text-white smooth-transition">{desc}</p>
               </div>
             ))}
           </div>
@@ -192,7 +192,7 @@ export default function Home() {
         <h2 className="text-3xl font-bold text-gray-900 mb-4">Ready to join RuralConnect?</h2>
         <p className="text-gray-500 mb-8 max-w-md mx-auto">Join thousands of rural makers and buyers creating a better rural economy.</p>
         <div className="flex justify-center gap-4">
-          <Link to="/register" className="btn-premium px-6 py-3.5 bg-primary-500 text-white font-semibold rounded-xl shadow-lg shadow-primary-200 hover:bg-primary-600">
+          <Link to="/register" className="btn-premium px-6 py-3.5 bg-green-600 text-white font-semibold rounded-xl shadow-lg shadow-green-200 hover:bg-green-700">
             Create Free Account
           </Link>
           <Link to="/products" className="btn-premium px-6 py-3.5 border border-stone-300 text-gray-700 font-semibold rounded-xl hover:bg-stone-100">
