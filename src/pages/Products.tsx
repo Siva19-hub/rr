@@ -35,11 +35,21 @@ export default function Products() {
     if (categoryId) query = query.eq('category_id', categoryId);
     if (search) query = query.ilike('title', `%${search}%`);
 
-    query.then(({ data, count }) => {
+    const timeout = setTimeout(() => {
+      console.log('Products loading timeout');
+      setLoading(false);
+    }, 5000);
+
+    query.then(({ data, count, error }) => {
+      if (error) {
+        console.error('Error fetching products:', error);
+      } else {
+        console.log('Fetched products:', data?.length, 'Total:', count);
+      }
       setProducts(data ?? []);
       setTotal(count ?? 0);
       setLoading(false);
-    });
+    }).finally(() => clearTimeout(timeout));
   }, [page, categoryId, search]);
 
   const setParam = (key: string, val: string) => {
@@ -55,7 +65,7 @@ export default function Products() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900">Marketplace</h1>
-        <p className="text-gray-500 text-sm mt-1">{total} products from rural makers across India</p>
+        <p className="text-gray-500 text-sm mt-1">{total} products from rural makers across Sri Lanka</p>
       </div>
 
       {/* Filters */}

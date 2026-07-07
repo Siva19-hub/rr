@@ -79,7 +79,7 @@ export default function Navbar() {
                 </Link>
                 <Link
                   to="/register"
-                  className="px-4 py-2 text-sm font-medium bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                  className="btn-premium px-4 py-2 text-sm font-medium bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
                 >
                   Get started
                 </Link>
@@ -113,7 +113,7 @@ export default function Navbar() {
           ) : (
             <div className="pt-2 flex flex-col gap-2">
               <Link to="/login" onClick={() => setMobileOpen(false)} className="px-4 py-2.5 text-center text-sm font-medium border border-stone-200 rounded-lg text-gray-700 hover:bg-stone-50">Sign in</Link>
-              <Link to="/register" onClick={() => setMobileOpen(false)} className="px-4 py-2.5 text-center text-sm font-medium bg-green-600 text-white rounded-lg hover:bg-green-700">Get started</Link>
+              <Link to="/register" onClick={() => setMobileOpen(false)} className="btn-premium px-4 py-2.5 text-center text-sm font-medium bg-green-600 text-white rounded-lg hover:bg-green-700">Get started</Link>
             </div>
           )}
         </div>

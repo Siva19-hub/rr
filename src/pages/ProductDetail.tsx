@@ -21,15 +21,45 @@ export default function ProductDetail() {
 
   useEffect(() => {
     if (!id) return;
-    supabase
-      .from('products')
-      .select('*, seller:profiles(id,full_name,email), category:categories(id,name), reviews(id,rating,comment,created_at,buyer:profiles(full_name))')
-      .eq('id', id)
-      .maybeSingle()
-      .then(({ data }) => {
-        setProduct(data);
+
+    const fetchProduct = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('products')
+          .select(`
+            *,
+            seller:seller_id(id,full_name,email),
+            category:category_id(id,name)
+          `)
+          .eq('id', id)
+          .maybeSingle();
+
+        if (error) {
+          console.error('Product fetch error:', error);
+          setProduct(null);
+        } else {
+          setProduct(data || null);
+        }
+
+        if (data) {
+          const { data: reviews } = await supabase
+            .from('reviews')
+            .select('id,rating,comment,created_at')
+            .eq('product_id', id);
+
+          if (reviews) {
+            setProduct(prev => prev ? { ...prev, reviews } : null);
+          }
+        }
+      } catch (err) {
+        console.error('Product fetch exception:', err);
+        setProduct(null);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchProduct();
   }, [id]);
 
   const avgRating = product?.reviews?.length
@@ -176,7 +206,7 @@ export default function ProductDetail() {
             {product.reviews.map((review) => (
               <div key={review.id} className="bg-white border border-stone-200 rounded-xl p-5">
                 <div className="flex items-center justify-between mb-3">
-                  <div className="font-semibold text-gray-900 text-sm">{(review as unknown as { buyer: { full_name: string } }).buyer?.full_name ?? 'Buyer'}</div>
+                  <div className="font-semibold text-gray-900 text-sm">Customer Review</div>
                   <div className="flex items-center gap-1">
                     {Array.from({ length: 5 }, (_, i) => (
                       <Star key={i} className={`w-3.5 h-3.5 ${i < review.rating ? 'text-amber-400 fill-amber-400' : 'text-stone-300'}`} />
